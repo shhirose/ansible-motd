@@ -1,0 +1,11 @@
+FROM debian:jessie
+
+ARG ANSIBLE_VERSION
+
+RUN set -x \
+  && apt-get update \
+  && apt-get upgrade -y \
+  && apt-get install -y \
+             python-setuptools \
+  && easy_install pip \
+  && if [ "${ANSIBLE_VERSION}" = "latest" ]; then pip install ansible; else pip install ansible\==${ANSIBLE_VERSION}; fi

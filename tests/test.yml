@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  become: yes
+  roles:
+    - ../../../ansible-motd
+  vars:
+    shhirose_motd_content: |-
+      xx      xx  xxxxxx  xxxxxx  xxxx
+      xxxx  xxxx  xx  xx    xx    xx  xx
+      xx xxxx xx  xx  xx    xx    xx  xx
+      xx  xx  xx  xxxxxx    xx    xxxx
+    shhirose_motd_shell_results:
+      - 'echo author: shhirose'
+    shhirose_motd_shell_after: |-
+      git: https://github.com/shhirose/ansible-motd
+      ansible-galaxy: https://galaxy.ansible.com/shhirose/motd/

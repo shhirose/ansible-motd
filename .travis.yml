@@ -38,7 +38,7 @@ env:
 
 install:
   - sudo docker pull ${os}:${version}
-  - sudo docker build --file tests/travis/Dockerfile.${os}_${version} --tag=${os}${version}:ansible tests/travis --build-arg ANSIBLE_VERSION=${ANSIBLE_VERSION}
+  - sudo docker build --file tests/travis/Dockerfile.${os}_${version} --tag=${os}_${version}:ansible tests/travis --build-arg ANSIBLE_VERSION=${ANSIBLE_VERSION}
 
 script:
   - sudo docker run -dt --privileged --volume="${PWD}":/tmp/ansible-motd ${os}_${version}:ansible /sbin/init > "${container_id}"

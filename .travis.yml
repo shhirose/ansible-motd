@@ -47,7 +47,11 @@ script:
   - sudo docker exec -t "$(cat ${container_id})" ansible-playbook /tmp/ansible-motd/tests/test.yml -i /tmp/ansible-motd/tests/inventory -c local
   - sudo docker exec -t "$(cat ${container_id})" ansible-playbook /tmp/ansible-motd/tests/test.yml -i /tmp/ansible-motd/tests/inventory -c local | grep -q 'changed=0.*failed=0' && (echo "" && exit 0) || (echo 'Changed or failed after retry' && exit 1)
 
-  - 'sudo docker exec -t "$(cat ${container_id})" cat /etc/motd | grep "echo author: shhirose"; if [ $? -ne 0 ]; then exit 1; fi'
+  - 'sudo docker exec -t "$(cat ${container_id})" cat /etc/motd | grep "xx      xx  xxxxxx  xxxxxx  xxxx"; if [ $? -ne 0 ]; then exit 1; fi'
+  - 'sudo docker exec -t "$(cat ${container_id})" cat /etc/motd | grep "xxxx  xxxx  xx  xx    xx    xx  xx"; if [ $? -ne 0 ]; then exit 1; fi'
+  - 'sudo docker exec -t "$(cat ${container_id})" cat /etc/motd | grep "xx xxxx xx  xx  xx    xx    xx  xx"; if [ $? -ne 0 ]; then exit 1; fi'
+  - 'sudo docker exec -t "$(cat ${container_id})" cat /etc/motd | grep "xx  xx  xx  xxxxxx    xx    xxxx"; if [ $? -ne 0 ]; then exit 1; fi'
+  - 'sudo docker exec -t "$(cat ${container_id})" cat /etc/motd | grep "author: shhirose"; if [ $? -ne 0 ]; then exit 1; fi'
   - 'sudo docker exec -t "$(cat ${container_id})" cat /etc/motd | grep "git: https://github.com/shhirose/ansible-motd"; if [ $? -ne 0 ]; then exit 1; fi'
   - 'sudo docker exec -t "$(cat ${container_id})" cat /etc/motd | grep "ansible-galaxy: https://galaxy.ansible.com/shhirose/motd/"; if [ $? -ne 0 ]; then exit 1; fi'
 

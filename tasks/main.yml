@@ -1,5 +1,9 @@
 ---
 - include_tasks: "{{ ansible_os_family }}.yml"
+  when: ansible_version.full >= "2.4.0"
+
+- include: "{{ ansible_os_family }}.yml"
+  when: ansible_version.full < "2.4.0"
 
 - name: Geting shell results
   shell: "{{ item }}"

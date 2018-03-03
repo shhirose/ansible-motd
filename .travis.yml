@@ -41,7 +41,7 @@ install:
   - sudo docker build --file tests/travis/Dockerfile.${os}_${version} --tag=${os}_${version}:ansible tests/travis --build-arg ANSIBLE_VERSION=${ANSIBLE_VERSION}
 
 script:
-  - sudo docker run -dt --privileged --volume="${PWD}":/tmp/ansible-motd ${os}_${version}:ansible if [ -f /sbin/init ]; then /sbin/init; else /lib/systemd/systemd; fi > "${container_id}"
+  - sudo docker run -dt --privileged --volume="${PWD}":/tmp/ansible-motd ${os}_${version}:ansible /bin/sh; fi > "${container_id}"
 
   - sudo docker exec -t "$(cat ${container_id})" ansible-playbook /tmp/ansible-motd/tests/test.yml -i /tmp/ansible-motd/tests/inventory --syntax-check
   - sudo docker exec -t "$(cat ${container_id})" ansible-playbook /tmp/ansible-motd/tests/test.yml -i /tmp/ansible-motd/tests/inventory -c local

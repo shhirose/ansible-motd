@@ -45,7 +45,7 @@ script:
 
   - sudo docker exec -t "$(cat ${container_id})" ansible-playbook /tmp/ansible-motd/tests/test.yml -i /tmp/ansible-motd/tests/inventory --syntax-check
   - sudo docker exec -t "$(cat ${container_id})" ansible-playbook /tmp/ansible-motd/tests/test.yml -i /tmp/ansible-motd/tests/inventory -c local
-  - sudo docker exec -t "$(cat ${container_id})" ansible-playbook /tmp/ansible-motd/tests/test.yml -i /tmp/ansible-motd/tests/inventory -c local | grep -q 'changed=0.*failed=0' && (echo "" && exit 0) || (echo 'Changed or failed after retry' && exit 1)
+  - sudo docker exec -t "$(cat ${container_id})" ansible-playbook /tmp/ansible-motd/tests/test.yml -i /tmp/ansible-motd/tests/inventory -c local | grep -q 'changed=0.*failed=0' && (echo ""; exit 0) || (echo 'Changed or failed after retry'; exit 1)
 
   - 'sudo docker exec -t "$(cat ${container_id})" cat /etc/motd | grep "xx      xx  xxxxxx  xxxxxx  xxxx"; if [ $? -ne 0 ]; then exit 1; fi'
   - 'sudo docker exec -t "$(cat ${container_id})" cat /etc/motd | grep "xxxx  xxxx  xx  xx    xx    xx  xx"; if [ $? -ne 0 ]; then exit 1; fi'

@@ -9,5 +9,6 @@ RUN set -x \
              gcc \
              python-setuptools \
              python-crypto \
+             ca-certificates \
   && easy_install pip \
   && if [ "${ANSIBLE_VERSION}" = "latest" ]; then pip install ansible; else pip install ansible\==${ANSIBLE_VERSION}; fi

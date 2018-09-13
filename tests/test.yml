@@ -1,8 +1,8 @@
 ---
-- hosts: localhost
-  become: yes
+- hosts: all
+  connection: docker
   roles:
-    - ../../../ansible-motd
+    - ../ansible-motd
   vars:
     shhirose_motd_content: |-
       xx      xx  xxxxxx  xxxxxx  xxxx
